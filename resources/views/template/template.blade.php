@@ -25,12 +25,12 @@
 
 <body>
     <!-- Header -->
-    <header class="container-fluid">
-        <nav id="nav" class="flex font-poppins">
+    <header id="header" class="container-fluid animate__animated animate__fadeInDown">
+        <nav id="nav" class="flex font-poppins bg-gradient">
 
             <div class="nav-brand">
                 <a class="navbar-brand" href="#">
-                    <img src="{{url('./assets/MargaLieLogo.png')}}" width="75px" height="75px" alt="">
+                    <img src="{{url('./assets/MargaLieLogo.png')}}" width="50px" height="50px" alt="">
                   </a>
             </div>
 
@@ -43,27 +43,27 @@
             <div class="collapse flex-grow">
                 <ul class="flex">
                     <li>
-                        <a href="#" class="link">Home</a>
+                        <a href="#" class="link-menu">Home</a>
                     </li>
                     <li>
-                        <a href="#" class="link">Tentang kami</a>
+                        <a href="#" class="link-menu">Tentang kami</a>
                     </li>
                     <li>
-                        <a href="#" class="link">Berita</a>
+                        <a href="#" class="link-menu">Berita</a>
                     </li>
                     <li>
-                        <a href="#" class="link">Event</a>
+                        <a href="#" class="link-menu">Event</a>
                     </li>
                     <li>
-                        <a href="#" class="link">Kontak kami</a>
+                        <a href="#" class="link-menu">Kontak kami</a>
                     </li>
                 </ul>
             </div>
 
             <div class="flex-initial">
-                <ul class="flex">
-                    <button class="btn btn-primary btn-shadow bg-gradient text-white text-uppercase">Sign in</button>
-                    <button class="btn btn-primary btn-shadow bg-gradient text-white text-uppercase ms-1">Login</button>
+                <ul class="flex flex-inside">
+                    <button class="btn btn-primary btn-shadow btn-border text-white text-uppercase">Sign in</button>
+                    <button class="btn btn-primary btn-shadow btn-border text-white text-uppercase ms-1">Login</button>
                 </ul>
             </div>
 
@@ -521,7 +521,7 @@
                     <h3 class="text-dark">Media Social</h3>
                     <div class="py-5">
                         <a href="#" class="d-block">
-                            <span class="text-gray"> <i class="fa-brands fa-youtube"></i>  Youtube</span>
+                            <span class="text-gray" id="logo-yt"> <i class="fa-brands fa-youtube"></i>  Youtube</span>
                         </a>
                     </div>
                 </div>

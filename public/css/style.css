@@ -13,6 +13,8 @@
     --text-dark: #1a3260;
     --text-dark2: #1a3760d4;
     --text-red: #ff4d6d;
+    --text-yellow: yellow;
+    --text-indigo: #4a00e0;
     --box-shadow: 0px 0px 50px 0px rgb(0 0 0 / 10%);
     --bg-blue: rgb(249, 243, 255);
     --bg-red: rgb(254, 247, 252);
@@ -104,6 +106,10 @@ ul {
     background: var(--bg-purple);
 }
 
+.bg-white {
+    background: var(--text-white);
+}
+
 .font-poppins {
     font-family: var(--font-poppins);
 }
@@ -175,7 +181,7 @@ ul {
 }
 
 .container-fluid {
-    width: 98%;
+    width: 100%;
 }
 
 .mx-auto {
@@ -228,13 +234,13 @@ ul {
     padding-right: 3.5rem;
 }
 
-.link {
-    color: var(--text-dark2);
+.link-menu {
+    color: var(--text-white);
     font-weight: bold;
 }
 
-.link:hover {
-    color: var(--text-red);
+.link-menu:hover {
+    color: var(--text-indigo);
 }
 
 .btn {
@@ -248,6 +254,12 @@ ul {
     border-radius: 50px;
     font-family: var(--font-poppins);
     font-weight: bold;
+}
+
+.btn-border {
+    border: var(--text-indigo);
+    background: gray;
+    border-width: 2px;
 }
 
 .btn-shodow {
@@ -384,7 +396,7 @@ body {
     }
 
     #nav {
-        background: transparent !important;
+        /* background: transparent !important; */
     }
 
     #nav .flex-initial ul button {
@@ -396,12 +408,12 @@ body {
 
 /* ------------------- Navigation Style ------------------------ */
 #nav {
-    position: absolute;
+    position: sticky !important;
     top: 0;
     left: 0;
     width: 100%;
     padding: 1rem 1.5rem;
-    background: var(--text-light);
+    background: var(--bg-gradient);
     flex-direction: column;
 }
 
@@ -430,10 +442,6 @@ body {
     top: 0;
     padding: 1rem;
     color: var(--text-dark2);
-}
-
-#nav .flex-initial ul button {
-    display: none;
 }
 
 .active {
@@ -634,3 +642,24 @@ body {
 }
 
 /* End footer */
+
+/* custom */
+#logo-yt:hover {
+    color: red;
+}
+
+#header {
+    z-index: 999999;
+    top: 0;
+    left: 0;
+}
+
+@keyframes fadeinmenu {
+    from {
+    }
+}
+
+.slide-in {
+    animation: slide-in 0.5s forwards;
+    -webkit-animation: slide-in 0.5s forwards;
+}

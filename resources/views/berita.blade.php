@@ -1,11 +1,11 @@
-@extends('template.template');
+@extends('template.template')
 @section('content')
   <!-- article area -->
   <main id="site-main">
   <section class="article-area container mx-auto pt-10">
     <div class="area-title text-center font-poppins ">
-        <span class="text-red">Our Recent Articles</span>
-        <h1 class="text-lg text-dark">Articles daily updated</h1>
+        <span class="text-red">Berita Terbaru kami</span>
+        <h1 class="text-lg text-dark">Berita diupdate setiap Minggu</h1>
     </div>
 
     <div class="grid cols-1 lg-cols-3 font-poppins py-10">

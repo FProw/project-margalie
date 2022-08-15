@@ -30,7 +30,7 @@
 
             <div class="nav-brand">
                 <a class="navbar-brand" href="#">
-                    <img src="{{url('./assets/MargaLieLogo.png')}}" width="75px" height="75px" alt="">
+                    <img src="{{url('./assets/MargaLieLogo.png')}}" width="50px" height="50px" alt="">
                   </a>
             </div>
 
