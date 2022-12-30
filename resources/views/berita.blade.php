@@ -3,7 +3,7 @@
   <!-- article area -->
   <main id="site-main">
   <section class="article-area container mx-auto pt-10">
-    <div class="area-title text-center font-poppins ">
+    <div class="area-title text-center font-poppins slide-in">
         <span class="text-red">Berita Terbaru kami</span>
         <h1 class="text-lg text-dark">Berita diupdate setiap Minggu</h1>
     </div>

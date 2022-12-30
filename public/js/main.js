@@ -19,6 +19,9 @@ window.onload = function digital_fn() {
         gutter: 100,
         fitWidth: true,
     });
+
+    let element = document.getElementById("header");
+    $(element).removeClass("animate__animated animate__fadeInDown");
 };
 
 window.onscroll = function myFunction() {
@@ -34,13 +37,13 @@ window.onscroll = function myFunction() {
     let y = Math.floor(nav.bottom);
     if (x > y) {
         element.style.position = "sticky";
-        $(element).addClass("slide-in");
+        $(element).addClass("animate__animated animate__fadeInDown");
     } else {
         element.style.position = "relative";
-        $(element).removeClass("slide-in");
+        $(element).removeClass("animate__animated animate__fadeInDown");
     }
-    console.log(x + " x");
-    console.log(y + " y");
+    // console.log(x + " x");
+    // console.log(y + " y");
 };
 //rellax js code
 

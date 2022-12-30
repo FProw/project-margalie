@@ -6,14 +6,14 @@
     box-sizing: border-box;
 }
 
-body{
+body {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-h1{
+h1 {
     text-align: center;
 }
 
@@ -24,23 +24,25 @@ form {
     gap: 10px;
 }
 
-form > input, label{
+form > input,
+label {
     width: 100%;
 }
 
-input[type=text], input[type=date]{
+input[type="text"],
+input[type="date"] {
     font-size: 1em;
     padding: 3px 5px;
 }
 
-.placeholder{
+.placeholder {
     /* position: absolute; */
 }
 
-label input{
+label input {
     width: 100%;
 }
-.container{
+.container {
     border: 1px solid black;
     padding: 80px;
     display: flex;
