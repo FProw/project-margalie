@@ -19,9 +19,6 @@ window.onload = function digital_fn() {
         gutter: 100,
         fitWidth: true,
     });
-
-    let element = document.getElementById("header");
-    $(element).removeClass("animate__animated animate__fadeInDown");
 };
 
 window.onscroll = function myFunction() {

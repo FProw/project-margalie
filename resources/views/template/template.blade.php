@@ -16,8 +16,9 @@
     <link rel="shortcut icon" href="../assets/MargaLieLogo.ico" type="image/x-icon">
     <link rel="stylesheet" href="../OwlCarousel/dist/assets/owl.carousel.css">
     <link rel="stylesheet" href="../OwlCarousel/dist/assets/owl.theme.default.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.7.2/flexslider.min.css">
     <!-- CSS -->
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
         integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -26,10 +27,25 @@
 <body>
     <!-- Header -->
     <header id="header" class="container-fluid animate__animated animate__fadeInDown">
+        <nav id="headercontacts" class="mx-3 bg-gradient-indigo flex justify-content-between p-2">
+            
+            <a href="https://www.youtube.com/channel/UCFfjnEwfvTWRokVuJi_8vqg" target="_blank" class="flex align-items-center ms-1 ">
+                <span class="text-gray c-white" id="logo-yt"> <i class="fa-brands fa-youtube fa-lg"></i></span>
+            </a>
+
+            <ul class="navbar-nav ml-auto flex justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link " href="#"><span class="d-block"> <i class="fa-solid fa-phone"></i> +62 877 6405 3444</span></a>
+                </li>
+                <li class="nav-item">
+                <a href="mailto:margalieepekanbaru@gmail.com" style="color: white"> <i class="fa-solid fa-at"></i> margalieepekanbaru@gmail.com</a>
+                </li>
+            </ul>
+        </nav>
         <nav id="nav" class="flex font-poppins bg-gradient">
 
             <div class="nav-brand">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="/">
                     <img src="{{url('./assets/MargaLieLogo.png')}}" width="50px" height="50px" alt="">
                   </a>
             </div>
@@ -40,39 +56,47 @@
                 </button>
             </div>
 
-            <div class="collapse flex-grow">
+            <div class="collapse flex-grow flex align-items-center">
                 <ul class="flex">
                     <li>
-                        <a href="#" class="link-menu">Home</a>
+                        <a href="/" class="link-menu">Home</a>
                     </li>
                     <li>
-                        <a href="#" class="link-menu">Tentang kami</a>
+                        <a href="/aboutus" class="link-menu">Tentang kami</a>
                     </li>
                     <li>
-                        <a href="#" class="link-menu">Berita</a>
+                        <a href="/berita" class="link-menu">Berita</a>
                     </li>
                     <li>
-                        <a href="#" class="link-menu">Event</a>
+                        <a href="#" class="link-menu">Struktur Organisasi</a>
                     </li>
                     <li>
-                        <a href="#" class="link-menu">Kontak kami</a>
+                        <a href="/video" class="link-menu">Video</a>
+                    </li>
+                    <li>
+                        <a href="#" class="link-menu">Kontak Kami</a>
                     </li>
                 </ul>
             </div>
 
-            <div class="flex-initial">
-                <ul class="flex flex-inside">
-                    <button class="btn btn-primary btn-shadow btn-border text-white text-uppercase">Sign in</button>
-                    <button class="btn btn-primary btn-shadow btn-border text-white text-uppercase ms-1">Login</button>
+            <div class="flex align-items-center">
+                <ul class="flex">
+                    @guest    
+                    <a class="btn btn-primary btn-shadow btn-border text-white text-uppercase ms-1" href="/login">Login</a>
+                    @endguest
+                    @auth
+                    <a class="btn btn-primary btn-shadow btn-border text-white text-uppercase ms-1" href="/dashboard">Back to Dash</a>
+                    @endauth
                 </ul>
             </div>
 
         </nav>
     </header>
 
+    <main id="site-main">
     @yield('content')
+    </main>
     <!-- end Header -->
-
 
     <!-- Main Section -->
     {{-- <main id="site-main">
@@ -487,7 +511,7 @@
         <section class="container mx-auto py-10">
             <div class="grid md-cols-2 lg-cols-3 font-poppins">
                 <div class="text-gray text-center md-text-left">
-                    <h3 class="text-dark">Alamat</h3>
+                    <h3 class="text-dark text-lg">Alamat</h3>
                     <div class="py-5">
                         <span class="d-block mb-1">
                             <i class="fa-solid fa-location-dot"></i>
@@ -498,8 +522,8 @@
                     </div>
                 </div>
                 <div class="text-gray text-center md-text-left">
-                    <h3 class="text-dark">About</h3>
-                    <div class="py-5">
+                    <h3 class="text-dark text-lg">Lokasi Kantor Kami</h3>
+                    {{-- <div class="py-5">
                         <a href="#" class="d-block">
                             <span class="text-gray">About us</span>
                         </a>
@@ -515,10 +539,11 @@
                         <a href="#" class="d-block">
                             <span class="text-gray">Patners</span>
                         </a>
-                    </div>
+                    </div> --}}
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.6483396584113!2d101.41748021470069!3d0.5288863996141415!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31d5abedca2855dd%3A0x2c2848e1eed4eafa!2sKantor%20Perkumpulan%20Marga%20Lee%20Pekanbaru!5e0!3m2!1sen!2sid!4v1669081619717!5m2!1sen!2sid" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
                 <div class="text-gray text-center md-text-left">
-                    <h3 class="text-dark">Media Social</h3>
+                    <h3 class="text-dark text-lg">Media Social</h3>
                     <div class="py-5">
                         <a href="#" class="d-block">
                             <span class="text-gray" id="logo-yt"> <i class="fa-brands fa-youtube"></i>  Youtube</span>
@@ -527,7 +552,7 @@
                 </div>
             </div>
             <div class="copyrights font-poppins">
-                <p class="text-gray py-5 text-center">
+                <p class="text-gray py-2 text-center">
                     Copyright © 2022. Marga Lie Pekanbaru. All rights reserved.
                 </p>
             </div>
@@ -548,20 +573,9 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="../js/main.js"></script>
     <script src="../OwlCarousel/dist/owl.carousel.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            $('.owl-carousel').owlCarousel({
-                items:1,
-                nav:false,
-                dots:false,
-                loop:true,
-                autoplay:true,
-                autoplayTimeout:3000,
-                center:true,
-                margin:10
-            });
-        });
-    </script>
+    <script src="../js/slideroption.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.7.2/jquery.flexslider-min.js"></script>
 </body>
 
 </html>
