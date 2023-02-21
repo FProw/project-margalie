@@ -25,13 +25,10 @@
         </div>
     </div>
     <div class="col-xl-3 col-md-6">
-        <div class="card bg-danger text-black mb-4">
-            <div class="card-body">Danger Card</div>
-            <div class="card-footer d-flex align-items-center justify-content-between">
-                <a class="small text-black stretched-link" href="#">View Details</a>
-                <div class="small text-black"><i class="fas fa-angle-right"></i></div>
-            </div>
-        </div>
-    </div>
-</div>
+      <div class="card mb-4 border border-dark border-2">
+        <div class="card-header text-white bg-danger">Jumlah Gambar</div>
+        <div class="card-body text-black fs-3 bg-secondary bg-opacity-25">{{$gallery}}</div>
+      </div>
+  </div>
+  <p class="fs-5">Untuk mengatur data, silahkan menggunakan menu-menu yang ada pada sidebar (menu disamping).</p>
 @endsection

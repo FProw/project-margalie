@@ -55,11 +55,16 @@
 <!-- End Banner Area -->
 
 <!-- Image-Slider Area -->
-
-<section class="text-center d-flex justify-center">
+<section class=" text-center d-flex justify-center align-items-center">
     <div class="flexslider">
         <ul class="slides">
-          <li>
+            @foreach ($slider as $item)
+            <li>
+                <img src="{{asset($item->path)}}"/>
+                <p class="flex-caption">{{$item->description}}</p>
+              </li>
+            @endforeach
+          {{-- <li>
             <img src="../assets/Slider/margalie1.jpeg" />
             <p class="flex-caption">Acara Marga Lie Bersama dalam merayakan HUT-RI ke-77</p>
           </li>
@@ -74,7 +79,7 @@
           <li>
             <img src="../assets/Slider/margalie4.jpeg" />
             <p class="flex-caption">Acara Marga Lie Bersama dalam merayakan HUT-RI ke-77</p>
-          </li>
+          </li> --}}
         </ul>
       </div>
 </section>
@@ -235,8 +240,23 @@
             </h1>
         </div>
 
+        {{-- Building Block --}}
+        {{-- <div class="flex-item animate__animated animate__fadeInUp">
+            <img src="" alt="" class="">
+            <h3 class="text-dark">Pak Kamin</h3>
+            <span class="text-gray">Branding</span>
+        </div> --}}
+
+
         <div class="images-flex font-poppins">
+            @foreach ($gallery as $image)
             <div class="flex-item animate__animated animate__fadeInUp">
+                <img src={{$image->imagepath}} alt="img1" class="w-100">
+                <h3 class="text-dark">{{$image->title}}</h3>
+                <span class="text-gray">{{$image->description}}</span>
+            </div>  
+            @endforeach
+            {{-- <div class="flex-item animate__animated animate__fadeInUp">
                 <img src="../assets/work/img1.png" alt="img1" class="w-100">
                 <h3 class="text-dark">Pak Kamin</h3>
                 <span class="text-gray">Branding</span>
@@ -280,7 +300,7 @@
                 <img src="../assets/work/img8.png" alt="img1" class="w-100">
                 <h3 class="text-dark">Desktop</h3>
                 <span class="text-gray">Branding</span>
-            </div>
+            </div> --}}
         </div>
     </div>
 </section>

@@ -15,8 +15,8 @@ class User extends Authenticatable
     use SoftDeletes;
 
     public $primarykey = 'id';
-    public function blog(){
-        return $this->hasMany(BlogPost::class);
+    public function blogPost(){
+        return $this->hasMany(BlogPost::class, 'blogPost_id');
     }
 
     protected $dates = ['deleted_at'];

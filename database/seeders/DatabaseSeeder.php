@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
 {
     /**
      * Seed the application's database.
-     *
+     *P
      * @return void
      */
     public function run()
@@ -68,41 +68,64 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        for($i = 1; $i <= 10; $i++){
+        for($i = 1; $i <= 30; $i++){
             $title = $faker->words(3, true);
             DB::table('blog_posts')->insert([
                 'title' => $title,
                 'user_id' => User::inRandomOrder()->first()->id,
                 'slug' => Str::slug($title, '-'),
                 'content' => $faker->paragraphs(10, true),
+                'image' => $faker->imageUrl(rand(3,8) * 100, rand(3,8) * 100, 'animals', true),
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ]);
         }
-        DB::table('galleries')->insert([
-            'title' => 'title1',
-            'description' => '',
-            'imagepath' => ''
+        for($i = 1; $i <=20; $i++){
+            DB::table('galleries')->insert([
+                'title' => 'title' . $i,
+                'description' => 'Description',
+                'imagepath' => $faker->imageUrl(rand(3,8) * 100, rand(3,8) * 100, 'animals', true)
+            ]);
+        }
+        Db::table('actors')->insert([
+            'nama' => 'Kamin',
+            'posisi' => 'Ketua Organisasi',
+            'prioritas' => 0,
+            'manager_id' => null
         ]);
-        DB::table('galleries')->insert([
-            'title' => 'title1',
-            'description' => '',
-            'imagepath' => ''
+        Db::table('actors')->insert([
+            'nama' => 'Erisun',
+            'posisi' => 'Wakil Ketua',
+            'prioritas' => 1,
+            'manager_id' => 1
         ]);
-        DB::table('galleries')->insert([
-            'title' => 'title1',
-            'description' => '',
-            'imagepath' => ''
+        Db::table('actors')->insert([
+            'nama' => 'Arni',
+            'posisi' => 'Iwalie',
+            'prioritas' => 1,
+            'manager_id' => 2
         ]);
-        DB::table('galleries')->insert([
-            'title' => 'title1',
-            'description' => '',
-            'imagepath' => ''
+        Db::table('actors')->insert([
+            'nama' => 'Agustina',
+            'posisi' => 'Bendahara',
+            'prioritas' => 2,
+            'manager_id' => 2
         ]);
-        DB::table('galleries')->insert([
-            'title' => 'title1',
-            'description' => '',
-            'imagepath' => ''
+        Db::table('sliders')->insert([
+        'description' => 'Acara Marga Lie Bersama dalam merayakan HUT-RI ke-77',
+        'path' => 'assets/slider/margalie1.jpeg'
+        ]);
+        Db::table('sliders')->insert([
+        'description' => 'Acara Marga Lie Bersama dalam merayakan HUT-RI ke-77',
+        'path' => 'assets/slider/margalie2.jpeg'
+        ]);
+        Db::table('sliders')->insert([
+        'description' => 'Acara Marga Lie Bersama dalam merayakan HUT-RI ke-77',
+        'path' => 'assets/slider/margalie3.jpeg'
+        ]);
+        Db::table('sliders')->insert([
+        'description' => 'Acara Marga Lie Bersama dalam merayakan HUT-RI ke-77',
+        'path' => 'assets/slider/margalie4.jpeg'
         ]);
     }
 }

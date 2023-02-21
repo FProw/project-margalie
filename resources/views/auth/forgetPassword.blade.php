@@ -21,7 +21,7 @@ rel="stylesheet"
 />
 	{{-- <link rel="stylesheet" href="css/mdb.min.css"> --}}
 	<link rel="stylesheet" href="css/myform.css">
-	<title>Login</title>
+	<title>Reset Password</title>
 
 </head>
 <body>
@@ -39,20 +39,24 @@ rel="stylesheet"
 											style="width: 185px;" alt="logo">
 										<h4 class="mt-1 mb-5 pb-1">Admin Marga Lie</h4>
 									</div>
-	
+									@if (Session::has('message'))
+                        <div class="alert alert-success" role="alert">
+                            {{ Session::get('message') }}
+                        </div>
+                    @endif
 									<form action="{{ route('forget.password.post') }}" method="POST">
 										@csrf
-										<p>Email Address for password reset</p>
+										<p>Email Address for Password Reset</p>
 
 										<div class="form-outline mb-4"> 
 											<input type="email" id="email" name="email" class="form-control"
-												placeholder="Email Address" />
+								7				placeholder="Email Address" />
 											<label class="form-label" for="email">Email</label>
 										</div>
 										<div class="text-center pt-1 mb-5 pb-1">
 											<button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Submit</button>
 											<a class="text-muted" href="/login">Go Back?</a>
-										</div>	
+										</div>
 									</form>
 									@if ($message = Session::get('status'))
 									<div class="alert alert-success" role="alert">

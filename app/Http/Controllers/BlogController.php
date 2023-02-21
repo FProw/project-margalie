@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Anggota;
+use App\Models\blog;
 use App\Models\BlogPost;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -29,9 +29,8 @@ class BlogController extends Controller
         $validateData = $request->validate([
             'title' => 'required',
             'content' => 'required',
-            'image' => 'mimes:jpeg,jpg,png,gif|max:10000',
+            'image' => 'required|mimes:jpeg,jpg,png|max:10000',
         ]);
-
         // Insert Blog
         $blog = new BlogPost();
         $blog->title = $validateData['title'];
@@ -39,7 +38,12 @@ class BlogController extends Controller
         $blog->slug = Str::slug($validateData['title']);
         $blog->user_id = Auth::id();
         if($validateData['image']){
-            $blog->image = $validateData['image'];
+            $file = $request->image;
+            $ext = $file->getClientOriginalExtension();
+            $filename = $blog->slug.'_'.time().'.'.$ext;
+            $request->image->move(public_path('assets/blog/gambar'), $filename);
+            $pathimage = 'assets/blog/gambar/'.$filename;
+            $blog->image = $pathimage;
         }
         $blog->save();
 
@@ -48,20 +52,25 @@ class BlogController extends Controller
     }
     function edit($id){
         $blog = BlogPost::where('id', $id)->first();
-        return view('admin.blog.editblog', ['anggota' => $anggota]);
+        return view('admin.blog.editblog', ['blog' => $blog]);
     }
     function update(Request $request, $id){
         $validateData = $request->validate([
             'title' => 'required',
             'content' => 'required',
-            'image' => 'mimes:jpeg,jpg,png,gif|max:10000',
+            'image' => 'mimes:jpeg,jpg,png|max:10000',
         ]);
-        $blog = new BlogPost();
+        $blog = BlogPost::find($id);
         $blog->title = $validateData['title'];
         $blog->content = $validateData['content'];
         $blog->slug = Str::slug($validateData['title']);
-        if($validateData['image']){
-            $blog->image = $validateData['image'];
+        if($request->hasFile('image') && $request->file('image')->isValid()){
+            $file = $request->image;
+            $ext = $file->getClientOriginalExtension();
+            $filename = $blog->slug.'_'.time().'.'.$ext;
+            $request->image->move(public_path('assets/blog/gambar'), $filename);
+            $pathimage = 'assets/blog/gambar/'.$filename;
+            $blog->image = $pathimage;
         }
         $blog->save();
         return redirect()->back()->with(['msg' => 'Blog Diupdate']);
@@ -69,10 +78,20 @@ class BlogController extends Controller
     function delete($id){
         $blog = BlogPost::find($id);
         $blog->delete();
-        return redirect('/listanggota')->with(['delete' => 'Deletion Successful']);
+        return redirect('/listblog')->with(['delete' => 'Deletion Successful']);
     }
     function deletelist(){
-        $anggota = Anggota::onlyTrashed()->get();
-        return view('admin.deletedAnggota')->with(['list' => $anggota]);
+        $blog = BlogPost::onlyTrashed()->get();
+        return view('admin.blog.deletedblog')->with(['list' => $blog]);
+    }
+    function restore($id){
+        $User = BlogPost::onlyTrashed()->where('id', $id);
+        $User->restore();
+        return back()->with('success', 'Restorasi Berhasil!');
+    }
+    function permadelete($id){
+        $User = BlogPost::onlyTrashed()->where('id', $id);
+        $User->forceDelete();
+        return back()->with('delete', 'Penghapusan Permanen Berhasil');
     }
 }

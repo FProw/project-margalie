@@ -14,7 +14,6 @@
                             {{ Session::get('message') }}
                         </div>
                     @endif
-  
                       <form action="{{ route('forget.password.post') }}" method="POST">
                           @csrf
                           <div class="form-group row">

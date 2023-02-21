@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Anggota;
+use App\Models\Gallery;
+use App\Models\BlogPost;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\BlogPost;
 
 class AdminController extends Controller
 {
@@ -14,10 +15,12 @@ class AdminController extends Controller
         $jumlahanggota = Anggota::count();
         $jumlahuser = User::count();
         $jumlahblog = BlogPost::count();
+        $jumlahgambar = Gallery::count();
         $data = [
             'anggota' => $jumlahanggota,
             'user' => $jumlahuser,
-            'blog' => $jumlahblog
+            'blog' => $jumlahblog,
+            'gallery' => $jumlahgambar
         ];
 
         return view('admin.dashboard')->with($data);

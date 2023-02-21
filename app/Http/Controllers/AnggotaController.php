@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Anggota;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class AnggotaController extends Controller
@@ -13,10 +12,10 @@ class AnggotaController extends Controller
     function list(){
         
         $anggota = Anggota::all();
-        return view('admin.listAnggota')->with(['list' => $anggota]);
+        return view('admin.anggota.listAnggota')->with(['list' => $anggota]);
     }
     function create(){
-        return view('admin.addAnggota');
+        return view('admin.anggota.addAnggota');
     }
     function add(Request $request){
         // Validasi
@@ -77,7 +76,7 @@ class AnggotaController extends Controller
     }
     function edit($id){
         $anggota = Anggota::where('id', $id)->first();
-        return view('admin.editAnggota', ['anggota' => $anggota]);
+        return view('admin.anggota.editAnggota', ['anggota' => $anggota]);
     }
     function update(Request $request, $id){
         $validateData = Validator::make( $request->all(),[
@@ -90,16 +89,16 @@ class AnggotaController extends Controller
             'agama' =>'required',
             'jenis_kelamin' => 'required',
             'alamat' => 'required|min:3|max:1000',
-            'NIK' => 'required|digits:16|unique:anggotas',
-            'pasfoto' => 'required|mimes:jpeg,png,jpg|max:10240',
-            'fotoktp' => 'required|mimes:jpeg,png,jpg|max:10240'
+            'pasfoto' => 'mimes:jpeg,png,jpg|max:10240',
+            'fotoktp' => 'mimes:jpeg,png,jpg|max:10240'
         ]);
 
         if($validateData->fails()){
             return redirect()->back()->withErrors($validateData)->withInput($request->input());
         }
+        $validateData = $request->all();
         // update Anggota
-        $anggota = new Anggota();
+        $anggota = Anggota::find($id);
         $anggota->email = $validateData['email'];
         $anggota->nama_depan = $validateData['nama_depan'];
         $anggota->nama_belakang = $validateData['nama_belakang'];
@@ -108,21 +107,20 @@ class AnggotaController extends Controller
         $anggota->jenis_kelamin = $validateData['jenis_kelamin'];
         $anggota->agama = $validateData['agama'];
         $anggota->alamat = $validateData['alamat'];
-        $anggota->NIK = $validateData['NIK'];
         if($request->pasfoto !=null){
+            unlink($anggota->pasfoto);
             $file = $request->pasfoto;
             $ext = $file->getClientOriginalExtension();
             $filename = $request->nama_depan.$request->nama_belakang.'_'.time().'.'.$ext;
-            // Storage::putFileAs('public/assets/anggota/pasfoto', $file, $filename);
             $request->pasfoto->move(public_path('assets/anggota/pasfoto'), $filename);
             $pathPasFoto = 'assets/anggota/pasfoto/'.$filename;
             $anggota->pasfoto = $pathPasFoto;
         }
         if($request->fotoktp !=null){
+            unlink($anggota->fotoktp);
             $file = $request->fotoktp;
             $ext = $file->getClientOriginalExtension();
             $filename = $request->nama_depan.$request->nama_belakang.'_'.time().'.'.$ext;
-            // Storage::putFileAs('public/assets/anggota/fotoktp', $file, $filename);
             $request->fotoktp->move(public_path('assets/anggota/fotoktp'), $filename);
             $pathfotoktp = 'assets/anggota/fotoktp/'.$filename;
             $anggota->fotoktp = $pathfotoktp;
@@ -137,15 +135,17 @@ class AnggotaController extends Controller
     }
     function deletelist(){
         $anggota = Anggota::onlyTrashed()->get();
-        return view('admin.deletedAnggota')->with(['list' => $anggota]);
+        return view('admin.anggota.deletedAnggota')->with(['list' => $anggota]);
     }
     function restore($id){
-        $anggota = Anggota::onlyTrashed()->where('id', $id);
+        $anggota = Anggota::onlyTrashed()->where('id', $id)->first();
         $anggota->restore();
         return back()->with('success', 'Restorasi Berhasil!');
     }
     function permadelete($id){
-        $anggota = Anggota::onlyTrashed()->where('id', $id);
+        $anggota = Anggota::onlyTrashed()->where('id', $id)->first();
+        unlink($anggota->fotoktp);
+        unlink($anggota->pasfoto);
         $anggota->forceDelete();
         return back()->with('delete', 'Penghapusan Permanen Berhasil');
     }

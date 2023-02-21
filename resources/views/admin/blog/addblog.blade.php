@@ -1,31 +1,26 @@
 @extends('template.dashtemplate')
 
-@section('title', 'Tambah Anggota')
+@section('title', 'Tambah Blog')
 
 @section('content')
-  <h1 class="my-3">Tambah User / Admin <i class="fa-solid fa-person fa-xs" data-fa-transform="down-2"></i></h1>
+  <h1 class="my-3"> <i class="fa-solid fa-newspaper fa-xs" data-fa-transform="down-2"></i> Tambah Blog</h1>
   <hr/>
-  <form action="/adduser" class="row g-3 mb-2" method="POST">
+  <form action="/addblog" class="row g-3 mb-2" method="POST" enctype="multipart/form-data">
     @csrf
-    <div class="col-6">
-      <label for="email" class="form-label">Email</label>
-      <input type="text" name="email" class="form-control" id="email" placeholder="Email" aria-label="Email" aria-describedby="emailHelpBlock">
-      <div id="emailHelpBlock" class="form-text">Email anda harus valid</div>
-    </div>
-    <div class="col-6">
-      <label for="nama" class="form-label">Nama Display</label>
-      <input type="text" name="nama" class="form-control" placeholder="Nama Display" aria-label="nama"aria-describedby="nameHelpBlock">
-      <div id="nameHelpBlock" class="form-text">Nama Display akan ditampilkan sebagai nama yang digunakan dalam admin</div>
+    <div class="col-12">
+      <label for="title" class="form-label">Judul Blog</label>
+      <input type="text" name="title" class="form-control" placeholder="Judul Blog" aria-label="title"aria-describedby="titleHelpBlock">
+      <div id="titleHelpBlock" class="form-text">Judul dari Blog yang akan dibuat</div>
     </div>
     <div class="col-12">
-      <label for="password" class="form-label">Password</label>
-      <input type="password" name="password" class="form-control" placeholder="password" aria-label="password"aria-describedby="passwordHelpBlock">
-      <div id="passwordHelpBlock" class="form-text">Password anda harus valid, minimal 8 karakter</div>
+      <label for="content" class="form-label">Isi Blog</label>
+      <textarea class="form-control" name="content" id="content" aria-label="content" aria-describedby="contentHelpBlock"></textarea>
+      <div id="contentHelpBlock" class="form-text">Judul dari Blog yang akan dibuat</div>
     </div>
     <div class="col-12">
-      <label for="password_confirmation" class="form-label">Konfirmasi Password</label>
-      <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password" aria-label="password_confirmation"aria-describedby="confirmHelpBlock">
-      <div id="confirmHelpBlock" class="form-text">Konfirm Password anda</div>
+      <label for="image" class="form-label">Pilih Gambar</label>
+      <input type="file" class="form-control" name="image" id="image" placeholder="Pilih Gambar" aria-describedby="fileHelpId">
+      <div id="fileHelpId" class="form-text">Pilih Gambar yang akan ditampilkan untuk blog</div>
     </div>
     <div class="col-12">
       <button type="submit" class="btn btn-primary">Submit</button>
@@ -46,4 +41,24 @@
     <strong>{{$msg}}</strong>
   </div>
   @endif
+@endsection
+
+@section('script')
+    <script>
+      tinymce.init({
+      selector: 'textarea',
+      plugins: 'anchor autolink charmap codesample emoticons link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
+      toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link media mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+      tinycomments_mode: 'embedded',
+      tinycomments_author: 'Author name',
+      mergetags_list: [
+        { value: 'First.Name', title: 'First Name' },
+        { value: 'Email', title: 'Email' },
+      ],
+      init_instance_callback : function(editor) {
+      var freeTiny = document.querySelector('.tox .tox-notification--in');
+      freeTiny.style.display = 'none';
+    }
+    });
+    </script>
 @endsection

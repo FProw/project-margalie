@@ -18,7 +18,7 @@ class UserController extends Controller
     function add(Request $request){
         // Validasi User
         $validateData = $request->validate([
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users,email',
             'nama' => 'required|min:3|max:30',
             'password' => 'required|min:8|confirmed'
         ]);

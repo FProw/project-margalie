@@ -7,13 +7,21 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>@yield('title')</title>
-        {{-- <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" /> --}}
-        
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+        <!-- Styles -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+        <!-- Or for RTL support -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css" />
+        <link href="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <link href="{{asset('css/styles2.css')}}" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css">
+        <script src="https://cdn.tiny.cloud/1/wl4on1aec09hrlolq4gzk66moqk6fgsp4fj1o5z012ardpnf/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -51,7 +59,7 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <div class="sb-sidenav-menu-heading">Core</div>
+                            <div class="sb-sidenav-menu-heading">Utama</div>
                             <a class="nav-link" href="/dashboard">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Dashboard
@@ -83,7 +91,7 @@
                                         <a class="nav-link" href="/deleteduserlist"><i class="fa-solid fa-trash mr-05"></i>Deleted User</a>
                                     </nav>
                                 </div>
-                                <div class="sb-sidenav-menu-heading">Content Menu</div>
+                                <div class="sb-sidenav-menu-heading">Menu Konten </div>
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#contentPage" aria-expanded="false" aria-controls="collapseLayouts">
                                     <div class="sb-nav-link-icon"><i class="fa-solid fa-pen"></i></div>
                                     Berita / Blog
@@ -92,31 +100,66 @@
                                 <div class="collapse" id="contentPage" aria-labelledby="headingThree" data-bs-parent="#sidenavAccordion">
                                     <nav class="sb-sidenav-menu-nested nav">
                                         <a class="nav-link" href="/listblog"><i class="fa-solid fa-newspaper mr-05"></i>List Blog</a>
-                                        <a class="nav-link" href="#"><i class="fa-solid fa-plus mr-05"></i>Tambah Berita</a>
-                                        <a class="nav-link" href="#"><i class="fa-solid fa-trash mr-05"></i>Berita Terhapus</a>
+                                        <a class="nav-link" href="/addblog"><i class="fa-solid fa-plus mr-05"></i>Tambah Berita</a>
+                                        <a class="nav-link" href="/deletedblog"><i class="fa-solid fa-trash mr-05"></i>Berita   Terhapus</a>
                                     </nav>
                                 </div>
-                                <div class="sb-sidenav-menu-heading">Editor Menu</div>
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#homePage" aria-expanded="false" aria-controls="collapseLayouts">
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#videoPage" aria-expanded="false" aria-controls="collapseLayouts">
+                                    <div class="sb-nav-link-icon"><i class="fa-solid fa-video"></i></div>
+                                    Video
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="videoPage" aria-labelledby="headingFour" data-bs-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link" href="/videos"><i class="fa-solid fa-newspaper mr-05"></i> List Video</a>
+                                        <a class="nav-link" href="/addvideos"> <i class="fa-solid fa-plus mr-05"></i>  Tambah Video</a>
+                                    </nav>
+                                </div>
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#organisationPage" aria-expanded="false" aria-controls="collapseLayouts">
+                                    <div class="sb-nav-link-icon"><i class="fa-solid fa-building"></i></div>
+                                    Struktur
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="organisationPage" aria-labelledby="headingFour" data-bs-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link" href="/listactor"><i class="fa-solid fa-newspaper mr-05"></i>List Struktur</a>
+                                        <a class="nav-link" href="/addactor"><i class="fa-solid fa-plus mr-05"></i>Tambah Struktur</a>
+                                    </nav>
+                                </div>
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#sliderPage" aria-expanded="false" aria-controls="collapseLayouts">
+                                    <div class="sb-nav-link-icon"><i class="fa-solid fa-building"></i></div>
+                                    Slider
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="sliderPage" aria-labelledby="headingFour" data-bs-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link" href="/listslider"><i class="fa-solid fa-newspaper mr-05"></i>List Slider</a>
+                                        <a class="nav-link" href="/addslider"><i class="fa-solid fa-plus mr-05"></i>Tambah Slider</a>
+                                    </nav>
+                                </div>
+                                {{-- <div class="sb-sidenav-menu-heading"> Menu Editor</div>
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#edit2Page" aria-expanded="false" aria-controls="collapseLayouts">
                                     <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                     Home Content
                                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                 </a>
-                                <div class="collapse" id="homePage" aria-labelledby="headingThree" data-bs-parent="#sidenavAccordion">
+                                <div class="collapse" id="edit2Page" aria-labelledby="headingThree" data-bs-parent="#sidenavAccordion">
                                     <nav class="sb-sidenav-menu-nested nav">
                                         <a class="nav-link" href="/listanggota">Slider</a>
                                         <a class="nav-link" href="/addanggota">Text Awal</a>
-                                        <a class="nav-link" href="/addanggota">Gallery</a>
+                                    </nav>
+                                </div> --}}
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#homePage" aria-expanded="false" aria-controls="collapseLayouts">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                    Gallery
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="homePage" aria-labelledby="headingThree" data-bs-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link" href="/listgallery"> <i class="fa-solid fa-list"></i> List Gallery</a>
+                                        <a class="nav-link" href="/addgallery"><i class="fa-solid fa-plus mr-05"></i> Add Gallery</a>
                                     </nav>
                                 </div>
-                            <a class="nav-link" href="charts.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                Charts
-                            </a>
-                            <a class="nav-link" href="tables.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Tables
-                            </a>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
@@ -722,10 +765,13 @@
         {{-- <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script> --}}
         <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
-        {{-- <script src="{{asset('js/datatables-simple-demo.js')}}"></script> --}}
+        <script src="{{asset('js/datatables-simple-demo.js')}}"></script>
         <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
         <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
         <script type="text/javascript" src="//cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+        <!-- Scripts -->
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
         @yield('script')
     </body>
 </html>

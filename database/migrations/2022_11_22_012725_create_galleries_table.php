@@ -15,9 +15,10 @@ return new class extends Migration
     {
         Schema::create('galleries', function (Blueprint $table) {
             $table->id();
-            $table->string('imagepath')->nullable()->default('text');
-            $table->string('title')->nullable()->default('text');
-            $table->string('description')->nullable()->default('text');
+            $table->string('imagepath');
+            $table->string('title');
+            $table->string('description');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

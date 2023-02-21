@@ -14,11 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('actors', function (Blueprint $table) {
-            $table->id();
+            $table->id()->unsigned();
             $table->string('nama');
             $table->string('posisi');
-            $table->string('path_gambar');
-            $table->text('deskripsi');
+            $table->integer('prioritas')->nullable();
+            $table->unsignedBigInteger('manager_id')->nullable();
+            $table->foreign('manager_id')->references('id')->on('actors')->cascadeOnUpdate()->cascadeOnUpdate();
             $table->timestamps();
         });
     }
@@ -28,6 +29,7 @@ return new class extends Migration
      *
      * @return void
      */
+
     public function down()
     {
         Schema::dropIfExists('actors');
